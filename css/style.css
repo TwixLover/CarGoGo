@@ -277,6 +277,7 @@ button {
 .navigation.navbar {
      float: right;
      padding: 0px;
+     padding-top: 8px;
 }
 
 .navigation.navbar-dark .navbar-nav .nav-link {
@@ -328,7 +329,7 @@ button {
 .header {
      width: 100%;
      background: #fff;
-     padding: 20px 30px;
+     padding: 10px 20px;
 }
 
 .logo a {
