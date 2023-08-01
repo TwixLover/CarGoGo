@@ -3,6 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+  <style>
+    .login-form {
+      display: block;
+      background-color: white;
+      padding: 10px;
+      border-radius: 5px;
+      transition: all 0.3s;
+      justify-content: end;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"],
+    .login-form input[type="submit"] {
+      display: none; /* Kezdetben rejtve vannak */
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+
+    .login-form input[type="submit"] {
+      background-color: yellow;
+      color: black;
+      cursor: pointer;
+    }
+
+    .login-form input[type="submit"]:hover {
+      background-color: gold;
+    }
+
+    .login-form .head-icon {
+      width: 50px;
+      height: 50px;
+      background-color: darkgray;
+      border-radius: 50%;
+      margin: 0 auto;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+    }
+
+    .login-form .head-icon:before {
+      content: "";
+      width: 30px;
+      height: 30px;
+      background-color: yellow;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0;
+      transition: all 0.3s;
+    }
+
+    .login-form .head-icon:hover:before {
+      opacity: 1;
+    }
+
+    .login-form .username-field,
+    .login-form .password-field {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      padding: 8px;
+      background-color: darkgray;
+      border-radius: 5px;
+    }
+
+    .login-form .head-icon:hover + .username-field,
+    .login-form .username-field:focus,
+    .login-form .password-field:focus {
+      display: block;
+    }
+  </style>
+
 </head>
 <body>
 <header>
@@ -10,7 +91,7 @@
   <div class="header">
     <div class="container">
       <div class="row">
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+        <div class="col-xl-3 col-lg-2 col-md-5 col-sm-5 col logo_section">
           <div class="full">
             <div class="center-desk">
               <div class="logo">
@@ -39,7 +120,19 @@
                   <a class="nav-link" href="#">Elérhetőségek</a>
                 </li>
               </ul>
+<<<<<<< Updated upstream
               <div class="sign_btn"><a href="#">Bejelentkezés</a></div>
+              <div class="regist_btn"><a href="#">Regisztráció</a></div>
+=======
+              <div class="sign_btn"><a href="Login.php">Regisztráció</a></div>
+              <div class="login-form">
+                <div class="head-icon"></div>
+                <input type="text" class="username-field" placeholder="Felhasználónév" required>
+                <div class="head-icon"></div>
+                <input type="password" class="password-field" placeholder="Jelszó" required>
+                <input type="submit" value="Bejelentkezés">
+              </div>
+>>>>>>> Stashed changes
             </div>
           </nav>
         </div>
@@ -47,6 +140,5 @@
     </div>
   </div>
 </header>
-
 </body>
 </html>
