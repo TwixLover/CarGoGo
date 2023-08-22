@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = isset($_POST['password']) ? mysqli_real_escape_string($connection, $_POST['password']) : null;
 
 
-    $sql = "SELECT user_id FROM users WHERE username = '$username' and password = '$password'";
+    $sql = "SELECT customer_id FROM customers WHERE username = '$username' and password = '$password'";
     $result = mysqli_query($connection,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $active = $row['active'];
@@ -20,9 +20,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $count = mysqli_num_rows($result);
 
     if($count == 1) {
-        $_SESSION['login_user'] = $username;
+        $_SESSION['login_customer'] = $username;
 
-        header("location: index.php");
+        header("location: logged_index.php");
     }else {
         $error = "Your Login Name or Password is invalid";
     }

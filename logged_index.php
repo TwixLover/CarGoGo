@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="en">
 <head>
     <!-- basic -->
@@ -40,6 +43,14 @@
 <header> <?php include 'header.html'?></header>
 <!-- end header -->
 <!-- banner -->
+<?php
+if (isset($_SESSION['login_customer'])) {
+    $username = $_SESSION['login_customer'];
+    echo "<h2>Üdvözöljük " . $username . "</h2>";
+} else {
+    echo "<h2>A felhasználó nincs bejelentkezve.</h2>";
+}
+?>
 <section class="banner_main">
     <div class="container">
         <div class="row d_flex">
@@ -74,54 +85,36 @@
                         <form class="main_form">
                             <div class="titlepage">
                                 <h2>Találja meg a tökéletes autót</h2>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" style="width: 85%" name="valueToSearch" id="" placeholder="Search...">
-                                    <button class="form-control" style="width: 15%" name="search"  title="Search"><i class="bi bi-search"></i></button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <select>
+                                        <option value="0">Márka</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <select>
+                                        <option value="0">Típus </option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <select>
+                                        <option value="0">Ár</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
                                 </div>
                                 <div class="col-sm-12">
                                     <button class="find_btn">Keresés</button>
                                 </div>
                             </div>
-                            </div>
-                                <?php
-                                $connection = "";
-                                $sql = "";
-                                $result = "";
-                                require 'db_config.php';
-
-                                if(isset($_POST['search']))
-                                {
-                                    $valueToSearch = $_POST['valueToSearch'];
-                                    // search in all table columns
-                                    // using concat mysql function
-                                    $query = "SELECT * FROM brands b JOIN cars c ON b.brand_id = c.brand_id WHERE CONCAT(b.brand, c.model) LIKE '%".$valueToSearch."%'";
-                                    $search_result = filterTable($query);
-
-                                }
-                                else {
-                                    $query = "SELECT * FROM brands";
-                                    $search_result = filterTable($query);
-                                }
-
-                                // function to connect and execute the query
-                                function filterTable($query)
-                                {
-                                    $connection = $GLOBALS['connection'];
-                                    $filter_Result = mysqli_query($connection, $query);
-                                    return $filter_Result;
-                                }
-
-                                if (mysqli_num_rows($search_result) == 0) {
-                                    echo "<p>No result</p>";
-                                }
-
-                                while ($row = mysqli_fetch_assoc($search_result))
-                                {
-                                    $brand = $row['brand'];
-                                    echo "<p>".$brand."</p>";
-                                }
-
-                                ?>
                         </form>
                     </div>
                 </div>

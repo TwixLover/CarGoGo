@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Admin"
+AuthUserFile C:\xampp\htdocs\CarGoGo\admin\.htpasswd
+require valid-user
