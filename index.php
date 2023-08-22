@@ -76,52 +76,31 @@
                                 <h2>Találja meg a tökéletes autót</h2>
                                 <div class="input-group">
                                     <input type="text" class="form-control" style="width: 85%" name="valueToSearch" id="" placeholder="Search...">
-                                    <button class="form-control" style="width: 15%" name="search"  title="Search"><i class="bi bi-search"></i></button>
-                                </div>
-                                <div class="col-sm-12">
-                                    <button class="find_btn">Keresés</button>
+                                    <div class="col-sm-12">
+                                        <button class="find_btn">Keresés</button>
+                                    </div>
+                                    <?php
+                                    $connection = "";
+                                    $sql = "";
+                                    $result = "";
+                                    require 'db_config.php';
+
+                                    if (isset($_GET['valueToSearch'])) {
+                                        $valueToSearch = $_GET['valueToSearch'];
+                                        $query = "SELECT * FROM brands b JOIN cars c ON b.brand_id = c.brand_id WHERE brand LIKE '%$valueToSearch%' OR model LIKE '%$valueToSearch%'";
+                                        $result = $connection->query($query);
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                $car_id = $row['car_id'];
+                                                echo "<a href='view_car.php?car_id=$car_id'>" . $row["brand"]. " " . $row["model"]."</a><br>";
+                                            }
+                                        } else {
+                                            echo "Nincs találat.";
+                                        }
+                                    }
+                                    ?>
                                 </div>
                             </div>
-                            </div>
-                                <?php
-                                $connection = "";
-                                $sql = "";
-                                $result = "";
-                                require 'db_config.php';
-
-                                if(isset($_POST['search']))
-                                {
-                                    $valueToSearch = $_POST['valueToSearch'];
-                                    // search in all table columns
-                                    // using concat mysql function
-                                    $query = "SELECT * FROM brands b JOIN cars c ON b.brand_id = c.brand_id WHERE CONCAT(b.brand, c.model) LIKE '%".$valueToSearch."%'";
-                                    $search_result = filterTable($query);
-
-                                }
-                                else {
-                                    $query = "SELECT * FROM brands";
-                                    $search_result = filterTable($query);
-                                }
-
-                                // function to connect and execute the query
-                                function filterTable($query)
-                                {
-                                    $connection = $GLOBALS['connection'];
-                                    $filter_Result = mysqli_query($connection, $query);
-                                    return $filter_Result;
-                                }
-
-                                if (mysqli_num_rows($search_result) == 0) {
-                                    echo "<p>No result</p>";
-                                }
-
-                                while ($row = mysqli_fetch_assoc($search_result))
-                                {
-                                    $brand = $row['brand'];
-                                    echo "<p>".$brand."</p>";
-                                }
-
-                                ?>
                         </form>
                     </div>
                 </div>

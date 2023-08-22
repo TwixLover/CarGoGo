@@ -85,34 +85,31 @@ if (isset($_SESSION['login_customer'])) {
                         <form class="main_form">
                             <div class="titlepage">
                                 <h2>Találja meg a tökéletes autót</h2>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 ">
-                                    <select>
-                                        <option value="0">Márka</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12">
-                                    <select>
-                                        <option value="0">Típus </option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12">
-                                    <select>
-                                        <option value="0">Ár</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-12">
-                                    <button class="find_btn">Keresés</button>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" style="width: 85%" name="valueToSearch" id="" placeholder="Search...">
+                                    <div class="col-sm-12">
+                                        <button class="find_btn">Keresés</button>
+                                    </div>
+                                    <?php
+                                    $connection = "";
+                                    $sql = "";
+                                    $result = "";
+                                    require 'db_config.php';
+
+                                    if (isset($_GET['valueToSearch'])) {
+                                        $valueToSearch = $_GET['valueToSearch'];
+                                        $query = "SELECT * FROM brands b JOIN cars c ON b.brand_id = c.brand_id WHERE brand LIKE '%$valueToSearch%' OR model LIKE '%$valueToSearch%'";
+                                        $result = $connection->query($query);
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                $brand_id = $row['brand_id'];
+                                                echo "<a href='view_car.php?brand_id=$brand_id'>" . $row["brand"]. " " . $row["model"]."</a><br>";
+                                            }
+                                        } else {
+                                            echo "Nincs találat.";
+                                        }
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </form>
