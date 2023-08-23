@@ -12,6 +12,15 @@ session_start();
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
     <title>CarGoGo</title>
+    <style>
+        .welcome {
+            color: yellow;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 30px;
+
+        }</style>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -31,6 +40,7 @@ session_start();
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
 </head>
 <!-- body -->
 <body class="main-layout">
@@ -40,19 +50,20 @@ session_start();
 </div>
 <!-- end loader -->
 <!-- header -->
-<header> <?php include 'header.html'?></header>
+<header> <?php include 'logged_header.html'?></header>
 <!-- end header -->
 <!-- banner -->
-<?php
-if (isset($_SESSION['login_customer'])) {
-    $username = $_SESSION['login_customer'];
-    echo "<h2>Üdvözöljük " . $username . "</h2>";
-} else {
-    echo "<h2>A felhasználó nincs bejelentkezve.</h2>";
-}
-?>
+
 <section class="banner_main">
     <div class="container">
+        <?php
+        if (isset($_SESSION['login_customer'])) {
+            $username = $_SESSION['login_customer'];
+            echo "<h2  class='welcome'>Üdvözöljük " . $username . "</h2>";
+        } else {
+            echo "<h2>A felhasználó nincs bejelentkezve.</h2>";
+        }
+        ?>
         <div class="row d_flex">
             <div class="col-md-12">
                 <div class="text-bg">
@@ -72,7 +83,7 @@ if (isset($_SESSION['login_customer'])) {
 </div>
 <!-- end banner -->
 <!-- bestCar -->
-<div id="contact" class="bestCar">
+<div id="top" class="bestCar">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
