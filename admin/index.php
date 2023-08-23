@@ -112,6 +112,8 @@
                 <th>BRAND</th>
                 <th>MODEL</th>
                 <th>PRODUCTION YEAR</th>
+                <th>ORDER TIME</th>
+                <th>ORDER DATE</th>
                 <th>PRICE</th>
                 <th>DELETE</th>
             </tr>
@@ -120,7 +122,7 @@
             <?php
             $connection = "";
             require 'db_config.php';
-            $sql_order = "SELECT * FROM orders o JOIN users u ON o.user_id = u.user_id JOIN brands b ON o.brand_id = b.brand_id JOIN cars c ON o.car_id = c.car_id ";
+            $sql_order = "SELECT * FROM orders o JOIN customers cu ON o.customer_id = cu.customer_id JOIN cars ca ON o.car_id = ca.car_id JOIN brands b ON ca.brand_id = b.brand_id";
             $result_order = mysqli_query($connection, $sql_order);
             while ($data = mysqli_fetch_assoc($result_order)) {
                 echo '
@@ -130,6 +132,8 @@
                 <td>'.$data['brand'].'</td>
                 <td>'.$data['model'].'</td>
                 <td>'.$data['prod_year'].'</td>
+                <td>'.$data['order_time'].'</td>
+                <td>'.$data['order_date'].'</td>
                 <td>'.$data['price'].'</td>
                 <td><a href="order_delete.php?order='.$data['order_id'].'">DELETE</td>
             </tr>';

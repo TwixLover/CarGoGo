@@ -18,6 +18,8 @@
         while ($data = mysqli_fetch_assoc($result)) {
             $_SESSION['brand_id'] = $data['brand_id'];
             $_SESSION['car_id'] = $data['car_id'];
+            $picture = $data['pic_name'];
+            echo "<img src='images/cars/$picture' width='300px'><br>";
             echo '
                         <tr>
                             <td>Autó: '.$data['brand'].'</td>
@@ -32,10 +34,9 @@
                             <br>
                             <td>Váltó típusa: '.$data['trans_type'].'</td>
                         </tr>';
-            //$picture = $data['pic_name'];
-            //echo "<img src='pics/$picture' width='300px'>";
         }
     }
     ?>
+<p>Ha szeretné leadni rendelését, akkor kérem <a href="login.php">jelentkezzen be</a>, vagy <a href="register.php">regisztráljon</a>!</p>
 </body>
 </html>

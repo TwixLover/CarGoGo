@@ -28,6 +28,12 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <style>
+        .bg-yellow {
+            background-color: yellow;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <!-- body -->
 <body class="main-layout">
@@ -108,6 +114,70 @@
         </div>
     </div>
 </div>
+<h1 class="text-center mt-5">Top 10 Legértékelt Autók</h1>
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <?php
+        $connection = "";
+        $sql = "";
+        $result = "";
+        require 'db_config.php';
+
+        if ($connection->connect_error) {
+            die("Hiba a kapcsolódás során: " . $connection->connect_error);
+        }
+
+        $sql = "SELECT * FROM car_ratings ORDER BY rating DESC LIMIT 10";
+        $result = $connection->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            $carCount = 0;
+            while ($row = $result->fetch_assoc()) {
+                $car_id = $row['car_id'];
+                $sql2 = "SELECT * FROM brands b JOIN cars c ON b.brand_id = c.brand_id WHERE c.car_id = {$row['car_id']}";
+                $result2 = mysqli_query($connection, $sql2);
+
+                if ($result2 && $result2->num_rows > 0) {
+                    $data = mysqli_fetch_assoc($result2);
+                    echo '<div class="col-md-2 mb-4">';
+                    echo "<a href='view_car.php?car_id=$car_id'>";
+                    echo '<div class="card bg-yellow">';
+                    echo "<div class='card-body'>";
+                    echo "<img src='images/cars/{$data["pic_name"]}'>";
+                    echo "<h2>{$data['brand']}</h2>";
+                    echo "<p>Modell: {$data['model']}</p>";
+                    echo "<p>Gyártási év: {$data['prod_year']}</p>";
+                    echo "<p>Értékelés: {$row['rating']}</p>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo '</a>';
+                    echo '</div>';
+
+                    $carCount++;
+                    if ($carCount >= 5) {
+                        echo '</div><div class="row">';
+                        $carCount = 0;
+                    }
+                }
+            }
+        } else {
+            echo "Nincs találat.";
+        }
+        echo '<div class="col-md-2"></div>';
+        $connection->close();
+        ?>
+    </div>
+</div>
+<script>
+    var carCards = document.querySelectorAll('.car-card');
+
+    carCards.forEach(function(card) {
+        card.addEventListener('click', function() {
+            var carId = card.getAttribute('data-carid');
+            window.location.href = 'view_car.php?id=' + carId;
+        });
+    });
+</script>
 <!--  footer -->
 <footer><?php include 'footer.html';?></footer>
 <script src="js/jquery.min.js"></script>
