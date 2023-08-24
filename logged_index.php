@@ -19,8 +19,15 @@ session_start();
             justify-content: center;
             align-items: center;
             padding-top: 30px;
-
-        }</style>
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+    </style>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">

@@ -84,54 +84,63 @@
             align-items: center;
             justify-content: center;
         }
+        .switch-label {
+            margin-right: 5px;
+            margin-left: 5px;
+            color: black;
+            padding-bottom: 5px;
+        }
+
         .switch {
             position: relative;
             display: inline-block;
-            width: 60px;
-            height: 34px;
+            width: 40px;
+            height: 18px;
+            padding-top: 5px;
         }
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
+
         .slider {
             position: absolute;
-            cursor: pointer;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
+            background-color: whitesmoke;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.4s;
         }
+
         .slider:before {
             position: absolute;
             content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-        input:checked + .slider {
-            background-color: #f39c12;
+            height: 15px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: papayawhip;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            transition: 0.4s;
         }
 
-        input:focus + .slider {
-            box-shadow: 0 0 1px #f39c12;
+        input:checked + .slider {
+            background-color: #ffc107;
         }
 
         input:checked + .slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
+            transform: translateX(16px);
         }
+
         .slider.round {
-            border-radius: 34px;
+            border-radius: 24px;
         }
 
         .slider.round:before {
@@ -143,15 +152,16 @@
 <div id="login">
     <form id="form" name="login" method="post" action="login_bg.php">
         <h3 id="log">Bejelentkezés</h3>
-        <span style="color: black;">Felhasználó</span>
-        <label class="switch">
-            <input type="checkbox" name="checkbox" value="customer">
-            <span class="slider round"></span>
-        </label>
-        <span style="color: black;">Személyzet</span>
+        <div style="display: flex; align-items: center; justify-content: center">
+            <span class="switch-label" ">Felhasználó</span>
+            <label class="switch">
+                <input type="checkbox" name="checkbox" value="customer">
+                <span class="slider round"></span>
+            </label>
+            <span class="switch-label" ;">Személyzet</span>
+        </div>
         <label for="username">Felhasználónév:</label>
         <input type="text" id="username" name="username" maxlength="30" size="60" autofocus placeholder="Felhasznalónév">
-        <br>
         <span class="error" id="error_username"> </span>
         <br>
         <label for="password">Jelszó:</label>

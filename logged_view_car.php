@@ -171,8 +171,10 @@ session_start();
             <label for="date">Dátum:</label>
             <input type="date" name="order_date" required>
             <br>
-            <input type="checkbox" name="driver" value="no_driver">
-            <p>Sofőr</p>
+            <label style="display: inline-flex; align-items: center;">
+                <input type="checkbox" name="driver" value="no_driver">
+                <p style="margin-left: 5px">Sofőrt is szeretnék</p>
+            </label>
             <br>
             <input type="submit" value="Foglalás elküldése">
         </form>
