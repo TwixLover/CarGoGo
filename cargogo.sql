@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Aug 23. 16:24
+-- Létrehozás ideje: 2023. Aug 24. 18:15
 -- Kiszolgáló verziója: 10.4.27-MariaDB
 -- PHP verzió: 8.2.0
 
@@ -155,6 +155,9 @@ CREATE TABLE `customers` (
   `customer_id` int(10) NOT NULL,
   `fname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL,
+  `personal_id` bigint(13) NOT NULL,
+  `drivers_id` bigint(9) NOT NULL,
+  `location` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(60) NOT NULL,
@@ -165,8 +168,8 @@ CREATE TABLE `customers` (
 -- A tábla adatainak kiíratása `customers`
 --
 
-INSERT INTO `customers` (`customer_id`, `fname`, `lname`, `email`, `username`, `password`, `reg_date`) VALUES
-(1, 'Custo', 'Mer', 'customer@gmail.com', 'Customer', 'customer', '2023-07-31');
+INSERT INTO `customers` (`customer_id`, `fname`, `lname`, `personal_id`, `drivers_id`, `location`, `email`, `username`, `password`, `reg_date`) VALUES
+(1, 'Custo', 'Mer', 2406002850013, 7053, 'PS ZITISTE', 'customer@gmail.com', 'customer', 'customer', '2023-07-31');
 
 -- --------------------------------------------------------
 
@@ -175,12 +178,19 @@ INSERT INTO `customers` (`customer_id`, `fname`, `lname`, `email`, `username`, `
 --
 
 CREATE TABLE `drivers` (
-  `driver_id` int(10) NOT NULL,
+  `drive_id` int(10) NOT NULL,
   `car_id` int(10) NOT NULL,
-  `fname` varchar(20) NOT NULL,
-  `lname` varchar(20) NOT NULL,
-  `phone` varchar(11) NOT NULL
+  `customer_id` int(10) NOT NULL,
+  `employee_id` int(10) NOT NULL,
+  `order_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `drivers`
+--
+
+INSERT INTO `drivers` (`drive_id`, `car_id`, `customer_id`, `employee_id`, `order_id`) VALUES
+(2, 19, 1, 0, 12);
 
 -- --------------------------------------------------------
 
@@ -192,10 +202,21 @@ CREATE TABLE `employees` (
   `employee_id` int(10) NOT NULL,
   `fname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL,
+  `personal_id` int(13) NOT NULL,
+  `drivers_id` int(9) NOT NULL,
+  `phone` varchar(11) NOT NULL,
+  `location` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `employees`
+--
+
+INSERT INTO `employees` (`employee_id`, `fname`, `lname`, `personal_id`, `drivers_id`, `phone`, `location`, `email`, `username`, `password`) VALUES
+(1, 'Norbert', 'Takarics', 2147483647, 859645, '0692125355', 'BEOGRAD', 'ntakarics@gmail.com', 'employee', 'employee');
 
 -- --------------------------------------------------------
 
@@ -209,6 +230,7 @@ CREATE TABLE `orders` (
   `car_id` int(10) NOT NULL,
   `order_time` int(2) NOT NULL,
   `order_date` date NOT NULL,
+  `driver` int(1) NOT NULL,
   `price` decimal(6,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -216,11 +238,14 @@ CREATE TABLE `orders` (
 -- A tábla adatainak kiíratása `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `customer_id`, `car_id`, `order_time`, `order_date`, `price`) VALUES
-(2, 1, 24, 12, '2023-08-31', '0.00'),
-(4, 1, 19, 48, '2023-08-31', '0.00'),
-(5, 1, 24, 24, '2023-09-07', '0.00'),
-(6, 1, 20, 36, '2024-01-01', '0.00');
+INSERT INTO `orders` (`order_id`, `customer_id`, `car_id`, `order_time`, `order_date`, `driver`, `price`) VALUES
+(2, 1, 24, 12, '2023-08-31', 0, '0.00'),
+(4, 1, 19, 48, '2023-08-31', 0, '0.00'),
+(5, 1, 24, 24, '2023-09-07', 0, '0.00'),
+(6, 1, 20, 36, '2024-01-01', 0, '0.00'),
+(8, 1, 27, 24, '2023-09-28', 0, '0.00'),
+(10, 1, 19, 24, '2023-11-30', 0, '0.00'),
+(12, 1, 19, 36, '2023-11-04', 1, '0.00');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -271,8 +296,11 @@ ALTER TABLE `customers`
 -- A tábla indexei `drivers`
 --
 ALTER TABLE `drivers`
-  ADD PRIMARY KEY (`driver_id`),
-  ADD UNIQUE KEY `car_id` (`car_id`);
+  ADD PRIMARY KEY (`drive_id`),
+  ADD KEY `car_id` (`car_id`) USING BTREE,
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `employee_id` (`employee_id`),
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- A tábla indexei `employees`
@@ -332,19 +360,19 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT a táblához `drivers`
 --
 ALTER TABLE `drivers`
-  MODIFY `driver_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `drive_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT a táblához `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `employee_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT a táblához `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
