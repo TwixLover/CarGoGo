@@ -16,14 +16,22 @@ if(isset($_GET['order'])){
     $customer_id = $data['customer_id'];
     $employee_username = $_SESSION['login_employee'];
     $employee_sql = "SELECT employee_id FROM employees WHERE username = '$employee_username'";
-    $employee_result = mysqli_query($connection, $employee_sql);
-    $employee_id = mysqli_fetch_assoc($employee_result);
+    $employee_id_result = mysqli_query($connection, $employee_sql);
+    $employee_data = mysqli_fetch_assoc($employee_id_result);
+    $employee_id = $employee_data['employee_id'];
 
     $sql = 'INSERT INTO drivers (car_id, customer_id, employee_id, order_id) VALUES ("' . $car_id . '","' . $customer_id . '","' . $employee_id . '","' . $order_id . '")';
     $result = mysqli_query($connection, $sql);
 
     if ($result) {
-        header("location: employee.php");
+        $sql = "DELETE FROM orders WHERE order_id = '$order_id'";
+        $result2 = mysqli_query($connection, $sql);
+
+        if ($result2) {
+            header("location: employee.php");
+        } else {
+            echo "Error deleting records: " . mysqli_error($connection);
+        }
     } else {
 
     }

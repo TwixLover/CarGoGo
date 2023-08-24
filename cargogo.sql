@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Aug 24. 18:15
+-- Létrehozás ideje: 2023. Aug 24. 18:30
 -- Kiszolgáló verziója: 10.4.27-MariaDB
 -- PHP verzió: 8.2.0
 
@@ -190,7 +190,7 @@ CREATE TABLE `drivers` (
 --
 
 INSERT INTO `drivers` (`drive_id`, `car_id`, `customer_id`, `employee_id`, `order_id`) VALUES
-(2, 19, 1, 0, 12);
+(5, 24, 1, 1, 15);
 
 -- --------------------------------------------------------
 
@@ -245,7 +245,8 @@ INSERT INTO `orders` (`order_id`, `customer_id`, `car_id`, `order_time`, `order_
 (6, 1, 20, 36, '2024-01-01', 0, '0.00'),
 (8, 1, 27, 24, '2023-09-28', 0, '0.00'),
 (10, 1, 19, 24, '2023-11-30', 0, '0.00'),
-(12, 1, 19, 36, '2023-11-04', 1, '0.00');
+(12, 1, 19, 36, '2023-11-04', 1, '0.00'),
+(14, 1, 24, 12, '2023-09-22', 1, '0.00');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -360,7 +361,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT a táblához `drivers`
 --
 ALTER TABLE `drivers`
-  MODIFY `drive_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `drive_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT a táblához `employees`
@@ -372,7 +373,7 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT a táblához `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
