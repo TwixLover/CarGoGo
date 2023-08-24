@@ -2,24 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ORDERS</title>
+    <link rel="stylesheet" href="css/employee.css">
 </head>
 <body>
-<h2>ORDERS</h2>
+<h2>Megrendelések</h2>
 <div class="table_wrapper">
     <table class="table" cellspacing="0">
         <tbody>
         <thead>
         <tr>
             <th>ORDER_ID</th>
-            <th>USERNAME</th>
-            <th>BRAND</th>
-            <th>MODEL</th>
-            <th>PRODUCTION YEAR</th>
-            <th>ORDER TIME</th>
-            <th>ORDER DATE</th>
-            <th>PRICE</th>
-            <th>ACCEPT</th>
+            <th>Megrendelő</th>
+            <th>Autó típusa</th>
+            <th>Model</th>
+            <th>Gyártási év</th>
+            <th>Megrendelés ideje</th>
+            <th>Megrendelés napja</th>
+            <th>Ár</th>
+            <th>Elfogadom</th>
         </tr>
         </thead>
         <tbody>
@@ -51,7 +53,8 @@
                 <td>'.$data['order_time'].'</td>
                 <td>'.$data['order_date'].'</td>
                 <td>'.$data['price'].'</td>
-                <td><a href="order_accept.php?order='.$data['order_id'].'">ACCEPT</td>
+                <td><a href="order_accept.php?order='.$data['order_id'].'" class="accept-button">Elfogadom</a></td>
+
             </tr>';
         }
         ?>
