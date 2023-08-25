@@ -142,5 +142,46 @@
             <tbody>
         </table>
     </div>
+    <br>
+    <h2>ACCEPTED ORDERS</h2>
+    <div class="table_wrapper">
+        <table class="table" cellspacing="0">
+            <tbody>
+            <thead>
+            <tr>
+                <th>DRIVE_ID</th>
+                <th>CUSTOMER_ID</th>
+                <th>CAR_ID</th>
+                <th>EMPLOYEE_ID</th>
+                <th>ORDER_ID</th>
+                <th>ORDER TIME</th>
+                <th>ORDER DATE</th>
+                <th>DELETE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $connection = "";
+            require 'db_config.php';
+            $sql_accepted_order = "SELECT * FROM drivers";
+            $result_accepted_order = mysqli_query($connection, $sql_accepted_order);
+
+            while ($data2 = mysqli_fetch_assoc($result_accepted_order)) {
+                echo '
+                    <tr>
+                        <td>'.$data2['drive_id'].'</td>
+                        <td>'.$data2['customer_id'].'</td>
+                        <td>'.$data2['car_id'].'</td>
+                        <td>'.$data2['employee_id'].'</td>
+                        <td>'.$data2['order_id'].'</td>
+                        <td>'.$data2['order_time'].'</td>
+                        <td>'.$data2['order_date'].'</td>
+                        <td><a href="accepted_order_delete.php?drive='.$data2['drive_id'].'">DELETE</td>
+                    </tr>';
+            }
+            ?>
+            <tbody>
+        </table>
+    </div>
 </body>
 </html>

@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['checkbox'])) {
         $checkbox = $_POST['checkbox'];
         $_SESSION['checkbox'] = $checkbox;
-        $sql = "SELECT employee_id FROM employees WHERE username = '$username' and password = '$password'";
+        $sql = "SELECT employee_id FROM employees WHERE employee_username = '$username' and password = '$password'";
         $result = mysqli_query($connection, $sql);
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 

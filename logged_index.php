@@ -68,7 +68,7 @@ session_start();
             $username = $_SESSION['login_customer'];
             echo "<h2  class='welcome'>Üdvözöljük " . $username . "</h2>";
         } else {
-            echo "<h2>A felhasználó nincs bejelentkezve.</h2>";
+            header("location: login.php");
         }
         ?>
         <div class="row d_flex">

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/employee.css">
 </head>
 <body>
+<a href="logout.php">Kijelentkezés</a>
 <h2>Megrendelések</h2>
 <div class="table_wrapper">
     <table class="table" cellspacing="0">
