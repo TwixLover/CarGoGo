@@ -11,7 +11,7 @@
     </div>
     <h2 id="log">INSERT</h2>
     <div id="insert">
-        <form id="form" name="insert" method="post" action="insert.php">
+        <form id="form" name="insert" method="post" action="insert.php" enctype="multipart/form-data">
             <div id="form_container">
                 <br>
                 <div id="input_div">
@@ -43,7 +43,8 @@
                 </div>
                 <br>
                 <div id="input_div">
-                <input type="text" id="pic_name" name="pic_name" maxlength="30" size="50" autofocus placeholder="Picture name">
+                    <th>Kép:  </th>
+                    <td><input type="file" name="image"></td>
                 </div>
                 <br>
                 <div id="input_div">

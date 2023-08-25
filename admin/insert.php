@@ -11,7 +11,13 @@ $seats = isset($_POST['seats']) ? mysqli_real_escape_string($connection, $_POST[
 $engine_size = isset($_POST['engine_size']) ? mysqli_real_escape_string($connection, $_POST['engine_size']) : null;
 $fuel_type = isset($_POST['fuel_type']) ? mysqli_real_escape_string($connection, $_POST['fuel_type']) : null;
 $trans_type = isset($_POST['trans_type']) ? mysqli_real_escape_string($connection, $_POST['trans_type']) : null;
-$pic_name = isset($_POST['pic_name']) ? mysqli_real_escape_string($connection, $_POST['pic_name']) : null;
+if(isset($_FILES['image']) && $_FILES['image']['name'] != ""){
+    $pic_name = $_FILES['image']['name'];
+    $directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
+    $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . $directory_self . "../images/cars/";
+    $uploadDirectory .= $pic_name;
+    move_uploaded_file($_FILES['image']['tmp_name'], $uploadDirectory);
+}
 
 $brand_id = "";
 
