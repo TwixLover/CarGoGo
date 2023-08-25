@@ -39,7 +39,7 @@ input {
     margin-top: 5px;
 }
 
-button {
+.btn {
     background-color: #f39c12;
     color: white;
     border: none;
