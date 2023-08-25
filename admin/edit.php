@@ -45,7 +45,7 @@
             $result_cars = mysqli_query($connection, $update_cars);
 
             if ($result_brands && $result_cars) {
-                header("location: index.php");
+                header("location: admin.php");
             } else {
                 echo "Update failed: " . mysqli_error($connection);
             }

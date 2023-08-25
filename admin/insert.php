@@ -29,5 +29,5 @@ if (isset($_POST['insert']) and !empty($brand) and !empty($model) and !empty($pr
     }
     $sql2 = 'INSERT INTO cars (brand_id, model, prod_year, seats, engine_size, fuel_type, trans_type, pic_name) VALUES ("' . $brand_id . '","' . $model . '","' . $prod_year . '","' . $seats . '","' . $engine_size . '","' . $fuel_type . '","' . $trans_type . '","' . $pic_name . '")';
     $result2 = mysqli_query($connection, $sql2) or die(mysqli_error($connection));
-    header("location: index.php");
+    header("location: admin.php");
 }
