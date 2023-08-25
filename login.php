@@ -69,10 +69,12 @@
         p {
             margin-top: 15px;
             text-align: center;
+            text-decoration: none;
         }
 
         a {
             color: #f39c12;
+            text-decoration: none;
         }
 
         a:hover {
@@ -171,7 +173,10 @@
         <input type="submit" id="btnOk" name="sg" value="Bejelentkezés">
         <br>
         <input type="reset" id="btnBack"  name="rg" value="Mégsem">
+        <div class="pass">
         <p>Még nincs profilja? <a href="register.php">Regisztráljon itt!</a></p>
+        <p><a href="forgotpass.html">Elfelejtettem a jelszavam</a></p>
+        </div>
     </form>
 </div>
 <br>
