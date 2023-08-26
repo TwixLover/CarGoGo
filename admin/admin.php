@@ -54,6 +54,112 @@
             </div>
         </form>
     </div>
+    <h2>CUSTOMERS</h2>
+    <div class="table_wrapper">
+        <table class="table" cellspacing="0">
+            <tbody>
+            <thead>
+            <tr>
+                <th>CUSTOMER_ID</th>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>PERSONAL_ID</th>
+                <th>DRIVERS_ID</th>
+                <th>LOCATION</th>
+                <th>EMAIL</th>
+                <th>USERNAME</th>
+                <th>PASSWORD</th>
+                <th>REGISTRATION_DATE</th>
+                <th>IS_BLOCKED</th>
+                <th>BLOCK</th>
+                <th>UNBLOCK</th>
+                <th>DELETE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $connection = "";
+            require 'db_config.php';
+
+            $sql_customer = "SELECT * FROM customers";
+            $result_customer = mysqli_query($connection, $sql_customer);
+            while ($data = mysqli_fetch_assoc($result_customer)) {
+                echo '
+                        <tr>
+                            <td>'.$data['customer_id'].'</td>
+                            <td>'.$data['fname'].'</td>
+                            <td>'.$data['lname'].'</td>
+                            <td>'.$data['personal_id'].'</td>
+                            <td>'.$data['drivers_id'].'</td>
+                            <td>'.$data['location'].'</td>
+                            <td>'.$data['email'].'</td>
+                            <td>'.$data['username'].'</td>
+                            <td>'.$data['password'].'</td>
+                            <td>'.$data['reg_date'].'</td>
+                            <td>'.$data['is_blocked'].'</td>
+                            <td><a href="customer_block.php?customer='.$data['customer_id'].'">BLOCK</td>
+                            <td><a href="customer_unblock.php?customer='.$data['customer_id'].'">UNBLOCK</td>
+                            <td><a href="customer_delete.php?customer='.$data['customer_id'].'">DELETE</td>
+                        </tr>';
+            }
+            ?>
+            <tbody>
+        </table>
+    </div>
+    <h2>EMPLOYEES</h2>
+    <div class="table_wrapper">
+        <table class="table" cellspacing="0">
+            <tbody>
+            <thead>
+            <tr>
+                <th>EMPLOYEE_ID</th>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>PERSONAL_ID</th>
+                <th>DRIVERS_ID</th>
+                <th>PHONE</th>
+                <th>LOCATION</th>
+                <th>EMAIL</th>
+                <th>USERNAME</th>
+                <th>PASSWORD</th>
+                <th>IS_BLOCKED</th>
+                <th>BLOCK</th>
+                <th>UNBLOCK</th>
+                <th>EDIT</th>
+                <th>DELETE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $connection = "";
+            require 'db_config.php';
+
+            $sql_employee = "SELECT * FROM employees";
+            $result_employee = mysqli_query($connection, $sql_employee);
+            while ($data = mysqli_fetch_assoc($result_employee)) {
+                echo '
+                        <tr>
+                            <td>'.$data['employee_id'].'</td>
+                            <td>'.$data['fname'].'</td>
+                            <td>'.$data['lname'].'</td>
+                            <td>'.$data['personal_id'].'</td>
+                            <td>'.$data['drivers_id'].'</td>
+                            <td>'.$data['phone'].'</td>
+                            <td>'.$data['location'].'</td>
+                            <td>'.$data['email'].'</td>
+                            <td>'.$data['employee_username'].'</td>
+                            <td>'.$data['password'].'</td>
+                            <td>'.$data['is_blocked'].'</td>
+                            <td><a href="employee_block.php?employee='.$data['employee_id'].'">BLOCK</td>
+                            <td><a href="employee_unblock.php?employee='.$data['employee_id'].'">UNBLOCK</td>
+                            <td><a href="employee_edit.php?employee='.$data['employee_id'].'">EDIT</td>
+                            <td><a href="employee_delete.php?employee='.$data['employee_id'].'">DELETE</td>
+                        </tr>';
+            }
+            ?>
+            <tbody>
+        </table>
+    </div>
     <h2>CARS</h2>
     <div class="table_wrapper">
         <table class="table" cellspacing="0">
@@ -157,6 +263,7 @@
                 <th>ORDER_ID</th>
                 <th>ORDER TIME</th>
                 <th>ORDER DATE</th>
+                <th>PRICE</th>
                 <th>DELETE</th>
             </tr>
             </thead>
@@ -177,6 +284,7 @@
                         <td>'.$data2['order_id'].'</td>
                         <td>'.$data2['order_time'].'</td>
                         <td>'.$data2['order_date'].'</td>
+                        <td>'.$data2['price'].'</td>
                         <td><a href="accepted_order_delete.php?drive='.$data2['drive_id'].'">DELETE</td>
                     </tr>';
             }
