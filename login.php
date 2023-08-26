@@ -69,12 +69,10 @@
         p {
             margin-top: 15px;
             text-align: center;
-            text-decoration: none;
         }
 
         a {
             color: #f39c12;
-            text-decoration: none;
         }
 
         a:hover {
@@ -155,12 +153,12 @@
     <form id="form" name="login" method="post" action="login_bg.php">
         <h3 id="log">Bejelentkezés</h3>
         <div style="display: flex; align-items: center; justify-content: center">
-            <span class="switch-label" ">Felhasználó</span>
+            <span class="switch-label">Felhasználó</span>
             <label class="switch">
                 <input type="checkbox" name="checkbox" value="customer">
                 <span class="slider round"></span>
             </label>
-            <span class="switch-label" ;">Személyzet</span>
+            <span class="switch-label">Személyzet</span>
         </div>
         <label for="username">Felhasználónév:</label>
         <input type="text" id="username" name="username" maxlength="30" size="60" autofocus placeholder="Felhasznalónév">
@@ -173,10 +171,8 @@
         <input type="submit" id="btnOk" name="sg" value="Bejelentkezés">
         <br>
         <input type="reset" id="btnBack"  name="rg" value="Mégsem">
-        <div class="pass">
+        <p><a href="forgotpass.html">Elfelejtettem a jelszavam!</a></p>
         <p>Még nincs profilja? <a href="register.php">Regisztráljon itt!</a></p>
-        <p><a href="forgotpass.html">Elfelejtettem a jelszavam</a></p>
-        </div>
     </form>
 </div>
 <br>
