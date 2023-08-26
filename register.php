@@ -81,7 +81,32 @@
         a:hover {
             color: #e67e22;
         }
+        @media only screen and (max-width: 600px) {
+            #regist {
+                max-width: 80%;
+                padding: 10px;
+            }
 
+            h3#log {
+                font-size: 28px;
+                margin-top: 5px;
+            }
+
+
+            label,
+            input[type="text"],
+            input[type="password"] {
+                font-size: 14px;
+                padding: 8px;
+                margin-bottom: 10px;
+            }
+
+
+            input[type="submit"],
+            input[type="reset"] {
+                padding: 8px 15px;
+            }
+        }
     </style>
 </head>
 

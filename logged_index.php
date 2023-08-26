@@ -78,10 +78,10 @@ session_start();
                     <strong>Autókölcsönző</strong>
                     <span>Előre megyünk, nem hátra</span>
                     <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since theLorem Ipsum is simply dummy text of the printing
+                        A CarGoGo felejthetetlen élményt ad, ha autókölcsönzésről van szó! Találja meg a tökéletes autót prémium kínálatunkból, akár sofőrrel, akár saját maga szeretné átélni a vezetés élményét!
                         <head></head>
                     </p>
-                    <a href="#">További információk</a>
+                    <a href="info.html">További információk</a>
                 </div>
             </div>
         </div>

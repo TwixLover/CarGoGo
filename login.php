@@ -146,6 +146,15 @@
         .slider.round:before {
             border-radius: 50%;
         }
+        @media only screen and (max-width: 600px) {
+            #login {
+                max-width: 80%;
+            }
+
+            h3#log {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 <body>
