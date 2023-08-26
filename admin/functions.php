@@ -16,7 +16,7 @@ if(isset($_GET['delete'])){
         $sql2 = "DELETE FROM brands WHERE brand_id = '$brand_id'";
         $result2 = mysqli_query($connection, $sql2);
         if ($result && $result2) {
-            header("location: index.php");
+            header("location: admin.php");
         } else {
             echo "Error deleting records: " . mysqli_error($connection);
         }

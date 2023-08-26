@@ -10,7 +10,7 @@ if(isset($_GET['order'])){
     $result = mysqli_query($connection, $sql);
 
     if ($result) {
-        header("location: index.php");
+        header("location: admin.php");
     } else {
         echo "Error deleting records: " . mysqli_error($connection);
     }

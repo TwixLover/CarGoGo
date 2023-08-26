@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Aug 25. 17:22
--- Kiszolgáló verziója: 10.4.27-MariaDB
--- PHP verzió: 8.2.0
+-- Host: 127.0.0.1
+-- Generation Time: Aug 26, 2023 at 02:10 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatbázis: `cargogo`
+-- Database: `cargogo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -34,10 +34,17 @@ CREATE TABLE `admin` (
   `password` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `email`, `username`, `password`) VALUES
+(1, 'admin@admin.com', 'admin', 'admin');
+
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `brands`
+-- Table structure for table `brands`
 --
 
 CREATE TABLE `brands` (
@@ -46,7 +53,7 @@ CREATE TABLE `brands` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `brands`
+-- Dumping data for table `brands`
 --
 
 INSERT INTO `brands` (`brand_id`, `brand`) VALUES
@@ -58,12 +65,14 @@ INSERT INTO `brands` (`brand_id`, `brand`) VALUES
 (6, 'Ferrari'),
 (7, 'Bugatti'),
 (9, 'McLaren'),
-(11, 'Bentley');
+(11, 'Bentley'),
+(12, 'Chevrolet'),
+(13, 'Lamborghini');
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `cars`
+-- Table structure for table `cars`
 --
 
 CREATE TABLE `cars` (
@@ -79,7 +88,7 @@ CREATE TABLE `cars` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `cars`
+-- Dumping data for table `cars`
 --
 
 INSERT INTO `cars` (`car_id`, `brand_id`, `model`, `prod_year`, `seats`, `engine_size`, `fuel_type`, `trans_type`, `pic_name`) VALUES
@@ -99,12 +108,14 @@ INSERT INTO `cars` (`car_id`, `brand_id`, `model`, `prod_year`, `seats`, `engine
 (30, 7, 'Veyron', '2002', 1, '1', '1', '1', 'bugatti_veyron.jpg'),
 (33, 9, 'F1', '2002', 1, '1', '1', '1', 'mclaren_f1.jpg'),
 (35, 9, 'MP4', '2002', 1, '1', '1', '1', 'mclaren_mp4.jpg'),
-(36, 11, 'Continental', '2002', 1, '1', '1', '1', 'bentley_continental.jpg');
+(36, 11, 'Continental', '2002', 1, '1', '1', '1', 'bentley_continental.jpg'),
+(37, 12, 'Aveo', '2009', 4, '1500', 'Benzin', '5', 'Aveo'),
+(38, 13, 'Hurricane', '2009', 4, '1500', 'Benzin', '5', 'amdlog.png');
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `car_ratings`
+-- Table structure for table `car_ratings`
 --
 
 CREATE TABLE `car_ratings` (
@@ -116,7 +127,7 @@ CREATE TABLE `car_ratings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `car_ratings`
+-- Dumping data for table `car_ratings`
 --
 
 INSERT INTO `car_ratings` (`rating_id`, `car_id`, `rating`, `description`, `rate_date`) VALUES
@@ -135,7 +146,7 @@ INSERT INTO `car_ratings` (`rating_id`, `car_id`, `rating`, `description`, `rate
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `completed_orders`
+-- Table structure for table `completed_orders`
 --
 
 CREATE TABLE `completed_orders` (
@@ -150,7 +161,7 @@ CREATE TABLE `completed_orders` (
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `customers`
+-- Table structure for table `customers`
 --
 
 CREATE TABLE `customers` (
@@ -167,7 +178,7 @@ CREATE TABLE `customers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `customers`
+-- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`customer_id`, `fname`, `lname`, `personal_id`, `drivers_id`, `location`, `email`, `username`, `password`, `reg_date`) VALUES
@@ -177,7 +188,7 @@ INSERT INTO `customers` (`customer_id`, `fname`, `lname`, `personal_id`, `driver
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `drivers`
+-- Table structure for table `drivers`
 --
 
 CREATE TABLE `drivers` (
@@ -191,7 +202,7 @@ CREATE TABLE `drivers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `drivers`
+-- Dumping data for table `drivers`
 --
 
 INSERT INTO `drivers` (`drive_id`, `car_id`, `customer_id`, `employee_id`, `order_id`, `order_time`, `order_date`) VALUES
@@ -200,7 +211,7 @@ INSERT INTO `drivers` (`drive_id`, `car_id`, `customer_id`, `employee_id`, `orde
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `employees`
+-- Table structure for table `employees`
 --
 
 CREATE TABLE `employees` (
@@ -217,7 +228,7 @@ CREATE TABLE `employees` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `employees`
+-- Dumping data for table `employees`
 --
 
 INSERT INTO `employees` (`employee_id`, `fname`, `lname`, `personal_id`, `drivers_id`, `phone`, `location`, `email`, `employee_username`, `password`) VALUES
@@ -226,7 +237,7 @@ INSERT INTO `employees` (`employee_id`, `fname`, `lname`, `personal_id`, `driver
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `orders`
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -240,7 +251,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `orders`
+-- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`order_id`, `customer_id`, `car_id`, `order_time`, `order_date`, `driver`, `price`) VALUES
@@ -252,37 +263,37 @@ INSERT INTO `orders` (`order_id`, `customer_id`, `car_id`, `order_time`, `order_
 (10, 1, 19, 24, '2023-11-30', 0, '0.00');
 
 --
--- Indexek a kiírt táblákhoz
+-- Indexes for dumped tables
 --
 
 --
--- A tábla indexei `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
--- A tábla indexei `brands`
+-- Indexes for table `brands`
 --
 ALTER TABLE `brands`
   ADD PRIMARY KEY (`brand_id`);
 
 --
--- A tábla indexei `cars`
+-- Indexes for table `cars`
 --
 ALTER TABLE `cars`
   ADD PRIMARY KEY (`car_id`),
   ADD KEY `brand_id` (`brand_id`) USING BTREE;
 
 --
--- A tábla indexei `car_ratings`
+-- Indexes for table `car_ratings`
 --
 ALTER TABLE `car_ratings`
   ADD PRIMARY KEY (`rating_id`),
   ADD KEY `car_id` (`car_id`);
 
 --
--- A tábla indexei `completed_orders`
+-- Indexes for table `completed_orders`
 --
 ALTER TABLE `completed_orders`
   ADD PRIMARY KEY (`comp_order_id`),
@@ -291,13 +302,13 @@ ALTER TABLE `completed_orders`
   ADD KEY `car_id` (`car_id`);
 
 --
--- A tábla indexei `customers`
+-- Indexes for table `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`customer_id`);
 
 --
--- A tábla indexei `drivers`
+-- Indexes for table `drivers`
 --
 ALTER TABLE `drivers`
   ADD PRIMARY KEY (`drive_id`),
@@ -307,13 +318,13 @@ ALTER TABLE `drivers`
   ADD KEY `order_id` (`order_id`);
 
 --
--- A tábla indexei `employees`
+-- Indexes for table `employees`
 --
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`employee_id`);
 
 --
--- A tábla indexei `orders`
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
@@ -321,59 +332,59 @@ ALTER TABLE `orders`
   ADD KEY `car_id` (`car_id`) USING BTREE;
 
 --
--- A kiírt táblák AUTO_INCREMENT értéke
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT a táblához `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT a táblához `brands`
+-- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `brand_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `brand_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT a táblához `cars`
+-- AUTO_INCREMENT for table `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `car_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `car_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
--- AUTO_INCREMENT a táblához `car_ratings`
+-- AUTO_INCREMENT for table `car_ratings`
 --
 ALTER TABLE `car_ratings`
   MODIFY `rating_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT a táblához `completed_orders`
+-- AUTO_INCREMENT for table `completed_orders`
 --
 ALTER TABLE `completed_orders`
   MODIFY `comp_order_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT a táblához `customers`
+-- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
   MODIFY `customer_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT a táblához `drivers`
+-- AUTO_INCREMENT for table `drivers`
 --
 ALTER TABLE `drivers`
   MODIFY `drive_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT a táblához `employees`
+-- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
   MODIFY `employee_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT a táblához `orders`
+-- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `order_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
