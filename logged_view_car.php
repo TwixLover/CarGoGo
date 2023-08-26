@@ -165,6 +165,8 @@ session_start();
             <label for="time">Kölcsönzési idő:</label>
             <input type="radio" name="order_time" value="12" checked> 12 óra
             <input type="radio" name="order_time" value="24"> 24 óra
+            <input type="radio" name="order_time" value="36"> 36 óra
+            <input type="radio" name="order_time" value="48"> 48 óra
             <br>
             <label for="date">Dátum:</label>
             <input type="date" name="order_date" required>
@@ -200,14 +202,7 @@ session_start();
             $car_id = $_SESSION['car_id'];
             $order_time = $_POST['order_time'];
             $order_date = $_POST['order_date'];
-            $driver = isset($_POST['driver']) ? 1 : 0;
-            $price = 100;
-            if ($order_time == 24) {
-                $price += 100;
-            }
-            if ($driver) {
-                $price += 200;
-            }
+            $driver = isset($_POST['driver']) ? 1 : 0; // Check the value of the driver checkbox
 
             $check_query = "SELECT * FROM orders WHERE car_id = '$car_id' AND order_date = '$order_date'";
             $check_result = mysqli_query($connection, $check_query);
@@ -215,13 +210,13 @@ session_start();
             if (mysqli_num_rows($check_result) > 0) {
                 echo "<div class='message'>Válasszon másik dátumot, ez a dátum már foglalt erre az autóra!</div>";
             } else {
-                $insert_query = "INSERT INTO orders (customer_id, car_id, order_time, order_date, driver, price) VALUES ('$customer_id', '$car_id', '$order_time', '$order_date', '$driver', '$price')";
+                $insert_query = "INSERT INTO orders (customer_id, car_id, order_time, order_date, driver) VALUES ('$customer_id', '$car_id', '$order_time', '$order_date', '$driver')";
+
                 if (mysqli_query($connection, $insert_query)) {
                     echo "<div class='message'>Sikeres foglalás!</div>";
-                    echo "<div class='message'>Foglalás ára: " . $price . "€</div>";
                 } else {
                     echo "<div class='message'>Hiba történt a foglalás során!</div>";
-                    echo "Hibaüzenet: " . mysqli_error($connection);
+                    echo "Hibaüzenet: " . mysqli_error($connection); // Display error message
                 }
             }
         }

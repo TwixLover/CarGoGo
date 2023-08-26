@@ -21,9 +21,8 @@ if(isset($_GET['order'])){
     $employee_id = $employee_data['employee_id'];
     $order_time = $data['order_time'];
     $order_date = $data['order_date'];
-    $price = $data['price'];
 
-    $sql = 'INSERT INTO drivers (car_id, customer_id, employee_id, order_id, order_time, order_date, price) VALUES ("' . $car_id . '","' . $customer_id . '","' . $employee_id . '","' . $order_id . '","' . $order_time . '","' . $order_date . '","' . $price . '")';
+    $sql = 'INSERT INTO drivers (car_id, customer_id, employee_id, order_id, order_time, order_date) VALUES ("' . $car_id . '","' . $customer_id . '","' . $employee_id . '","' . $order_id . '","' . $order_time . '","' . $order_date . '")';
     $result = mysqli_query($connection, $sql);
 
     if ($result) {

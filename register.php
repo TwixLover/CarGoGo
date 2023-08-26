@@ -27,7 +27,7 @@
 
         h3#log {
             color: #f39c12;
-            margin-top: 10px;
+            margin-top: 10;
             font-size: 35px;
             display: flex;
             justify-content: center;
@@ -96,13 +96,13 @@
         <input type="text" id="lname" name="lname" maxlength="20" size="20" autofocus placeholder="Vezetéknév">
         <span class="error" id="error_lname"> </span>
         <label for="lname">Személyi szám</label>
-        <input type="text" id="per_id" name="per_id" maxlength="20" size="20" autofocus placeholder="Személyi szám">
+        <input type="text" id="lname" name="lname" maxlength="20" size="20" autofocus placeholder="Személyi szám">
         <span class="error" id="error_lname"> </span>
         <label for="lname">Vezetői engedély szám:</label>
-        <input type="text" id="dri_id" name="dri_id" maxlength="20" size="20" autofocus placeholder="Vezetői engedély szám">
+        <input type="text" id="lname" name="lname" maxlength="20" size="20" autofocus placeholder="Vezetői engedély szám">
         <span class="error" id="error_lname"> </span>
         <label for="lname">Engedély kiállításának helye:</label>
-        <input type="text" id="location" name="location" maxlength="20" size="20" autofocus placeholder="Kiadás helye">
+        <input type="text" id="lname" name="lname" maxlength="20" size="20" autofocus placeholder="Kiadás helye">
         <span class="error" id="error_lname"> </span>
         <label for="email">Email:</label>
         <input type="text" id="email" name="email" maxlength="50" size="60" autofocus placeholder="Email">

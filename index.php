@@ -100,14 +100,7 @@
 
                                     if (isset($_GET['valueToSearch'])) {
                                         $valueToSearch = $_GET['valueToSearch'];
-                                        $searchTerms = explode(' ', $valueToSearch);
-                                        $query = "SELECT * FROM brands b JOIN cars c ON b.brand_id = c.brand_id WHERE ";
-                                        $conditions = array();
-                                        foreach ($searchTerms as $term) {
-                                            $term = '%' . $term . '%';
-                                            $conditions[] = "(brand LIKE '$term' OR model LIKE '$term')";
-                                        }
-                                        $query .= implode(' AND ', $conditions);
+                                        $query = "SELECT * FROM brands b JOIN cars c ON b.brand_id = c.brand_id WHERE brand LIKE '%$valueToSearch%' OR model LIKE '%$valueToSearch%'";
                                         $result = $connection->query($query);
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
