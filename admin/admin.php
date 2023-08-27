@@ -292,5 +292,41 @@
             <tbody>
         </table>
     </div>
+    <h2>COMPLETED ORDERS</h2>
+    <div class="table_wrapper">
+        <table class="table" cellspacing="0">
+            <tbody>
+            <thead>
+            <tr>
+                <th>COMP_ORDER_ID</th>
+                <th>ORDER_ID</th>
+                <th>CUSTOMER_ID</th>
+                <th>CAR_ID</th>
+                <th>ORDER DATE</th>
+                <th>PRICE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $connection = "";
+            require 'db_config.php';
+            $sql_completed_order = "SELECT * FROM completed_orders";
+            $result_completed_order = mysqli_query($connection, $sql_completed_order);
+
+            while ($data2 = mysqli_fetch_assoc($result_completed_order)) {
+                echo '
+                    <tr>
+                        <td>'.$data2['comp_order_id'].'</td>
+                        <td>'.$data2['order_id'].'</td>
+                        <td>'.$data2['customer_id'].'</td>
+                        <td>'.$data2['car_id'].'</td>
+                        <td>'.$data2['order_date'].'</td>
+                        <td>'.$data2['price'].'</td>
+                    </tr>';
+            }
+            ?>
+            <tbody>
+        </table>
+    </div>
 </body>
 </html>
