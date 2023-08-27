@@ -159,7 +159,7 @@ session_start();
             die("Hiba a kapcsolódás során: " . $connection->connect_error);
         }
 
-        $sql = "SELECT * FROM car_ratings ORDER BY rating DESC LIMIT 10";
+        $sql = "SELECT c.*, ROUND(AVG(r.rating)) AS avg_rating FROM cars c LEFT JOIN car_ratings r ON c.car_id = r.car_id GROUP BY c.car_id HAVING avg_rating IS NOT NULL ORDER BY avg_rating DESC LIMIT 10";
         $result = $connection->query($sql);
 
         if ($result && $result->num_rows > 0) {
@@ -179,7 +179,7 @@ session_start();
                     echo "<h2>{$data['brand']}</h2>";
                     echo "<p>Modell: {$data['model']}</p>";
                     echo "<p>Gyártási év: {$data['prod_year']}</p>";
-                    echo "<p>Értékelés: {$row['rating']}</p>";
+                    echo "<p>Értékelés: {$row['avg_rating']}</p>";
                     echo "</div>";
                     echo "</div>";
                     echo '</a>';

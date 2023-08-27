@@ -226,6 +226,28 @@ session_start();
             }
         }
         ?>
+        <form method="get">
+            <label for="rating">Értékelés (1-10):</label>
+            <input type="number" name="rating" min="1" max="10" required>
+            <button type="submit" name="submit_rating">Értékelés beküldése</button>
+        </form>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            if (isset($_GET['submit_rating'])) {
+                $rating = $_GET['rating'];
+                $car_id = $_SESSION['car_id'];
+
+                $insert_rating_query = "INSERT INTO car_ratings (car_id, rating, rate_date) VALUES ('$car_id', '$rating', NOW())";
+
+                if (mysqli_query($connection, $insert_rating_query)) {
+                    echo "<div class='message'>Sikeres értékelés beküldése!</div>";
+                } else {
+                    echo "<div class='message'>Hiba történt az értékelés beküldése során!</div>";
+                    echo "Hibaüzenet: " . mysqli_error($connection);
+                }
+            }
+        }
+        ?>
         <a href="logged_index.php" class="back-link">Vissza</a>
     </div>
 </div>
