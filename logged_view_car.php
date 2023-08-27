@@ -196,6 +196,13 @@ session_start();
             $customer_id = $data['customer_id'];
         }
 
+        require 'PHPMailer-master/src/Exception.php';
+        require 'PHPMailer-master/src/PHPMailer.php';
+        require 'PHPMailer-master/src/SMTP.php';
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
+        require 'vendor/autoload.php';
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $car_id = $_SESSION['car_id'];
             $order_time = $_POST['order_time'];
@@ -209,22 +216,45 @@ session_start();
                 $price += 200;
             }
 
-            $check_query = "SELECT * FROM orders WHERE car_id = '$car_id' AND order_date = '$order_date'";
-            $check_result = mysqli_query($connection, $check_query);
+            function send_thanks() {
+                $mail = new PHPMailer();
+                $mail->isSMTP();
+                $mail->Host = 'sandbox.smtp.mailtrap.io';
+                $mail->SMTPAuth = true;
+                $mail->Port = 2525;
+                $mail->Username = '1ea10c51550ba1';
+                $mail->Password = 'bc34abded6fb10';
+                $mail->setFrom('info@mailtrap.io', 'Mailtrap');
+                $mail->Subject = 'Cargogo rendelés';
+                $mail->addAddress('1ea10c51550ba1+1@inbox.mailtrap.io');
+                $mail->isHTML(true);
+                $mailContent = "<h1>Cargogo rendelés</h1>
+    <p>Köszönjük, hogy nálunk vásárolt!</p>";
+                $mail->Body = $mailContent;
+                if($mail->send()){
+                    echo 'Message has been sent';
+                }else{
+                    echo 'Message could not be sent.';
+                    echo 'Mailer Error: ' . $mail->ErrorInfo;
+                }
+            }
+
+            $check_sql = "SELECT * FROM orders WHERE car_id = '$car_id' AND order_date = '$order_date'";
+            $check_result = mysqli_query($connection, $check_sql);
 
             if (mysqli_num_rows($check_result) > 0) {
                 echo "<div class='message'>Válasszon másik dátumot, ez a dátum már foglalt erre az autóra!</div>";
             } else {
-                $insert_query = "INSERT INTO orders (customer_id, car_id, order_time, order_date, driver, price) VALUES ('$customer_id', '$car_id', '$order_time', '$order_date', '$driver', '$price')";
-                if (mysqli_query($connection, $insert_query)) {
+                $insert_sql = "INSERT INTO orders (customer_id, car_id, order_time, order_date, driver, price) VALUES ('$customer_id', '$car_id', '$order_time', '$order_date', '$driver', '$price')";
+                if (mysqli_query($connection, $insert_sql)) {
+                    send_thanks();
                     echo "<div class='message'>Sikeres foglalás!</div>";
                     echo "<div class='message'>Foglalás ára: " . $price . "€</div>";
                 } else {
                     echo "<div class='message'>Hiba történt a foglalás során!</div>";
                     echo "Hibaüzenet: " . mysqli_error($connection);
                 }
-            }
-        }
+            }        }
         ?>
         <form method="get">
             <label for="rating">Értékelés (1-10):</label>

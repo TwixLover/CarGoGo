@@ -11,9 +11,28 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
-/*function send_verification($username, $email, $verification) {
-
-}*/
+function send_verification($verification) {
+    $mail = new PHPMailer();
+    $mail->isSMTP();
+    $mail->Host = 'sandbox.smtp.mailtrap.io';
+    $mail->SMTPAuth = true;
+    $mail->Port = 2525;
+    $mail->Username = '1ea10c51550ba1';
+    $mail->Password = 'bc34abded6fb10';
+    $mail->setFrom('info@mailtrap.io', 'Mailtrap');
+    $mail->Subject = 'CarGoGo igazoló email';
+    $mail->addAddress('1ea10c51550ba1+1@inbox.mailtrap.io');
+    $mail->isHTML(true);
+    $mailContent = "<h1>CarGoGo igazoló email</h1>
+    <p>Kérem kattintson <a href='http://localhost/CarGoGo/verification.php?verification=$verification'>ide</a>, hogy igazolja az email címét!</p>";
+    $mail->Body = $mailContent;
+    if($mail->send()){
+        echo 'Message has been sent';
+    }else{
+        echo 'Message could not be sent.';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+    }
+}
 
 $fname = isset($_POST['fname']) ? mysqli_real_escape_string($connection, $_POST['fname']) : null;
 $lname = isset($_POST['lname']) ? mysqli_real_escape_string($connection, $_POST['lname']) : null;
@@ -39,13 +58,15 @@ if (mysqli_num_rows($checkEmailRun) > 0) {
     echo '<a href="register.php">Vissza</a>';
 } else {
     if (isset($_POST['regist']) and !empty($fname) and !empty($lname) and !empty($per_id) and !empty($dri_id) and !empty($location) and !empty($email) and !empty($username) and !empty($password) and !empty($reg_date)) {
-
-        // password hashing
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        //send_verification($username, $email, $verification);
-        $sql = 'INSERT INTO customers (fname, lname, personal_id, drivers_id, location, email, username, password, reg_date) VALUES ("' . $fname . '","' . $lname . '","' . $per_id . '","' . $dri_id . '","' . $location . '","' . $email . '","' . $username . '","' . $hashed_password . '","' . $reg_date . '")';
+        $sql = 'INSERT INTO customers (fname, lname, personal_id, drivers_id, location, email, username, password, reg_date, verification) VALUES ("' . $fname . '","' . $lname . '","' . $per_id . '","' . $dri_id . '","' . $location . '","' . $email . '","' . $username . '","' . $hashed_password . '","' . $reg_date . '","' . $verification . '")';
         $result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
-        echo 'Sikeres regisztráció!';
-        echo '<a href="login.php">Tovább a bejelentkezéshez</a>';
+        if ($result){
+            send_verification($verification);
+            echo 'Sikeres regisztráció!';
+            echo '<a href="login.php">Tovább a bejelentkezéshez</a>';
+        } else {
+            header('location: register.php');
+        }
     }
 }

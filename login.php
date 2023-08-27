@@ -159,6 +159,12 @@
 </head>
 <body>
 <div id="login">
+    <?php
+        if (isset($_SESSION['ver_check'])){
+            $ver_check = $_SESSION['ver_check'];
+            echo $ver_check;
+        }
+    ?>
     <form id="form" name="login" method="post" action="login_bg.php">
         <h3 id="log">Bejelentkezés</h3>
         <div style="display: flex; align-items: center; justify-content: center">
@@ -180,7 +186,7 @@
         <input type="submit" id="btnOk" name="sg" value="Bejelentkezés">
         <br>
         <input type="reset" id="btnBack"  name="rg" value="Mégsem">
-        <p><a href="forgotpass.html">Elfelejtettem a jelszavam!</a></p>
+        <p><a href="forgotpass.php">Elfelejtettem a jelszavam!</a></p>
         <p>Még nincs profilja? <a href="register.php">Regisztráljon itt!</a></p>
     </form>
 </div>
