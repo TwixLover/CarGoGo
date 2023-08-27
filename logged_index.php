@@ -224,6 +224,7 @@ session_start();
             <th>ORDER TIME</th>
             <th>ORDER DATE</th>
             <th>PRICE</th>
+            <th>COMPLETE</th>
             <th>DELETE</th>
         </tr>
         </thead>
@@ -246,7 +247,8 @@ session_start();
                         <td>'.$data2['prod_year'].'</td>
                         <td>'.$data2['order_time'].'</td>
                         <td>'.$data2['order_date'].'</td>
-                        <td>'.$data2['price'].'</td>';
+                        <td>'.$data2['price'].'</td>
+                        <td><a href="completed_order.php?order='.$data2['order_id'].'">COMPLETE</td>';
                         if ($current_time > $allowed_deletion_time) {
                             echo '<td>Törlés lejárt</td>';
                         } else {
