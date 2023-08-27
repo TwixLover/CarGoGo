@@ -4,39 +4,17 @@ $sql = "";
 $result = "";
 require 'db_config.php';
 
-/*
-//require 'PHPMailer\src\Exception.php';
-//require 'PHPMailer\src\PHPMailer.php';
-//require 'PHPMailer\src\SMTP.php';
-
+require 'PHPMailer-master/src/Exception.php';
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/SMTP.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
 require 'vendor/autoload.php';
 
-function send_verification($username, $email, $verification) {
-    $mail = new PHPMailer(TRUE);
-    $mail -> isSMTP();
-    $mail -> SMTPAuth = TRUE;
-    $mail -> Host = 'smtp.gmail.com';
-    $mail -> Username = '';
-    $mail -> Password = '';
-    $mail -> SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail -> Port= 587;
-    $mail -> setFrom('', $username);
-    $mail -> addAddress($email, $username);
-    $mail -> isHTML(true);
-    $mail -> Subject = 'Email hitelesítés a CarGoGo oldalon';
-    $email_template = '
-        <h2>Ön regisztrált a CarGoGo weboldalán!</h2>
-        <p>Hogy be tudjon jelentkezni, kérjük hitelesítse az email címét!</p>
-        <br><br>
-        <a href="http://localhost/CarGoGo/verification.php?verification=$verification">Hitelesítés</a>
-    ';
-    $mail -> Body = $email_template;
-    $mail -> send();
-}
-*/
+/*function send_verification($username, $email, $verification) {
+
+}*/
+
 $fname = isset($_POST['fname']) ? mysqli_real_escape_string($connection, $_POST['fname']) : null;
 $lname = isset($_POST['lname']) ? mysqli_real_escape_string($connection, $_POST['lname']) : null;
 $per_id = isset($_POST['per_id']) ? mysqli_real_escape_string($connection, $_POST['per_id']) : null;

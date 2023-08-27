@@ -64,8 +64,10 @@ session_start();
 <section class="banner_main">
     <div class="container">
         <?php
+        $customer_id = '';
         if (isset($_SESSION['login_customer'])) {
             $username = $_SESSION['login_customer'];
+            $customer_id = $_SESSION['customer_id'];
             echo "<h2  class='welcome'>Üdvözöljük " . $username . "</h2>";
         } else {
             header("location: login.php");
@@ -208,6 +210,54 @@ session_start();
         });
     });
 </script>
+<h2>ORDERS</h2>
+<div class="table_wrapper">
+    <table class="table" cellspacing="0">
+        <tbody>
+        <thead>
+        <tr>
+            <th>ORDER_ID</th>
+            <th>USERNAME</th>
+            <th>BRAND</th>
+            <th>MODEL</th>
+            <th>PRODUCTION YEAR</th>
+            <th>ORDER TIME</th>
+            <th>ORDER DATE</th>
+            <th>PRICE</th>
+            <th>DELETE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        $connection = "";
+        require 'db_config.php';
+
+        $sql_order = "SELECT * FROM orders o JOIN customers cu ON o.customer_id = cu.customer_id JOIN cars ca ON o.car_id = ca.car_id JOIN brands b ON ca.brand_id = b.brand_id WHERE cu.customer_id = '$customer_id'";
+        $result_order = mysqli_query($connection, $sql_order);
+        while ($data2 = mysqli_fetch_assoc($result_order)) {
+            $current_time = time();
+            $allowed_deletion_time = strtotime('-4 hours', strtotime($data2['order_date']));
+            echo '
+                  <tr>
+                        <td>'.$data2['order_id'].'</td>
+                        <td>'.$data2['username'].'</td>
+                        <td>'.$data2['brand'].'</td>
+                        <td>'.$data2['model'].'</td>
+                        <td>'.$data2['prod_year'].'</td>
+                        <td>'.$data2['order_time'].'</td>
+                        <td>'.$data2['order_date'].'</td>
+                        <td>'.$data2['price'].'</td>';
+                        if ($current_time > $allowed_deletion_time) {
+                            echo '<td>Törlés lejárt</td>';
+                        } else {
+                            echo '<td><a href="customer_order_delete.php?order='.$data2['order_id'].'">DELETE</td>';
+                         }
+            echo '</tr>';
+        }
+        ?>
+        <tbody>
+    </table>
+</div>
 <!--  footer -->
 <footer><?php include 'footer.html';?></footer>
 <script src="js/jquery.min.js"></script>
