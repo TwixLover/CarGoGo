@@ -40,15 +40,15 @@ To run this project locally, you'll need the following:
 2. Open **phpMyAdmin** in your browser (usually at `http://localhost/phpmyadmin`).
 3. Create a new database (e.g., `bookrates`).
 4. Import the provided SQL file if available (`database.sql` or similar).
-5. Make sure to update your database connection settings ( `config.php`):
+5. Make sure to update your database connection settings ( `db_config.php`):
 
 ```config.php
 DB_HOST=localhost
 DB_USER=root
 DB_PASS=
-DB_NAME=bookrates
+DB_NAME=cargogo
 
 **Run the app:**
-
+```
 ✍️ Author
 Developed by WhoKnocks&Takarics
